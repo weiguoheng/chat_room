@@ -1,0 +1,49 @@
+.big-box{
+    border: 1px solid #000000;
+    width:300px;
+    height:500px;
+    margin:auto;
+    border-radius: 14px;
+    position: fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}
+.send-box{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    height: 60px;
+}
+.word-box{
+    height: 60%;
+    width: 70%;
+    border: solid 1px black;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    margin: auto 15px;
+    border-radius: 4px;
+    padding-left: 5px;
+}
+.send-button-box{
+    border: solid 1px black;
+    height: 50%;
+    width: 14%;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    margin: auto 15px;
+    right: 0;
+    border-radius: 4px;
+    line-height: 200%;
+    text-align: center;
+}
+
+.right-chat-box{
+    border: solid 1px black;float: right;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 4px;
+}
