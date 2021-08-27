@@ -49,7 +49,7 @@ function send(e)
     let params = new URLSearchParams(document.location.search.substring(1));
     let message = $(".word-box").val();
     $(".word-box").val('');
-    let data = '{"type":"say","to_client":"'+params.get('name')+'","client_name":'+name+',"msg":'+message+'}';
+    let data = '{"type":"say","to_client":"'+params.get('name')+'","client_name":"'+name+'","msg":"'+message+'"}';
     console.log('发送数据：'+data);
     ws.send(data);
 
@@ -60,6 +60,7 @@ function onmessage(e)
     console.log('onmessage:'+e.data);
     var data = JSON.parse(e.data);
     console.log('data',data)
+    console.log('type',data['to_client'])
     switch(data['type']){
         // 服务端ping客户端
         case 'ping':
@@ -82,11 +83,18 @@ function onmessage(e)
             break;
         // 发言
         case 'say':
+            console.log('ws say to:'+data.to_client);
             // 右边新增气泡
-            let parent = $(".message-box");
-            let childdiv=$('<div class="right-chat-box">'+data.msg+'</div>');
-            parent.append(childdiv);
-            console.log('respond',data.msg)
+            if(name && name == data.to_client) {
+                // 左边新增气泡
+                let parent = $(".message-print-box");
+                let childdiv=$('<div style="height: 71px;"><div class="user-chat-box opc-left">'+data.msg+'</div></div>');
+                parent.append(childdiv);
+            } else {
+                let parent = $(".message-print-box");
+                let childdiv=$('<div style="height: 71px;"><div class="user-chat-box opc-right">'+data.msg+'</div></div>');
+                parent.append(childdiv);
+            }
             break;
         // 用户退出 更新用户列表
         case 'logout':
@@ -94,9 +102,4 @@ function onmessage(e)
             // say(data['from_client_id'], data['from_client_name'], data['from_client_name']+' 退出了', data['time']);
             delete client_list[data['from_client_id']];
     }
-}
-
-function addRight()
-{
-
 }

@@ -4,7 +4,9 @@
 <body onload="connect();">
     <div class="big-box">
         {foreach $list as $key=>$vo }
-            <a href="/index/user/chat?name={$vo.client_name}">{$vo.client_name}</a>
+            <div class="user-list">
+                <a href="/index/user/chat?name={$vo.client_name}">{$vo.client_name}</a>
+            </div>
         {/foreach}
     </div>
 </body>

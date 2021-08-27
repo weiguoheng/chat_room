@@ -42,8 +42,49 @@
 }
 
 .right-chat-box{
-    border: solid 1px black;float: right;
+    border: solid 1px black;
     margin: 20px;
     padding: 10px;
     border-radius: 4px;
+}
+.message-box{
+    height: 100%;
+}
+.one-people-chat{
+    border: solid 1px black;
+    width: 49%;
+    height: 100%;
+    float: left;
+}
+.user-list{
+    text-align: center;
+    padding: 5px 0;
+    border: solid 1px black;
+    margin: 5px 10px;
+}
+
+.opc-left{
+    float: left;
+}
+
+.opc-right{
+    float: right;
+}
+
+.user-chat-box{
+    border: solid 1px black;
+    padding: 10px;
+    margin:10px;
+    border-radius: 5px;
+}
+
+.back-icon{
+    height: 15px;
+    width: 15px;
+    border: solid 2px black;
+    transform: rotate(45deg);
+    float: left;
+    margin: 25px;
+    border-top: none;
+    border-right: none;
 }

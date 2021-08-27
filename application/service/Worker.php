@@ -7,9 +7,9 @@ use Workerman\Lib\Timer;
 
 class Worker extends Server
 {
+    private $uidConnections = [];
     public function onMessage($connection,$data)
     {
-        file_put_contents('message.csv', $data);
         $data = json_decode($data, true);
         if(isset($data['type'])) {
             if($data['type'] == 'login') {
@@ -21,11 +21,15 @@ class Worker extends Server
                     $data['time'] = date('Y-m-d H:i:s');
                     $userRedis->addOnlineUser(json_encode($data));
                 }
+                // 记录client_name和connection的对应关系
+                $this->uidConnections[$data['client_name']] = $connection;
             } elseif($data['type'] == 'pong') {
                 return;
             } elseif($data['type'] == 'say') {
                 $connection->lastMessageTime = time();
                 $data['respond_time'] = date('Y-m-d H:i:s');
+                $connectionToUser = $this->uidConnections[$data['to_client']];
+                $connectionToUser->send(json_encode($data));
             } elseif($data['type'] == 'close') {
                 $data['respond_time'] = date('Y-m-d H:i:s');
             }
